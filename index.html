@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Eaglercraft Modpack Builder</title>
+  <style>
+    :root {
+      --bg: #061a25;
+      --bg-2: #0d2738;
+      --panel: #0b2134;
+      --panel-strong: #123448;
+      --text: #e9f7ff;
+      --muted: #9cbfd8;
+      --primary: #46b4d8;
+      --primary-dark: #2e88a8;
+      --border: #1d4863;
+      --success: #72f0c8;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --input: #0d2130;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font: 16px/1.5 system-ui, sans-serif;
+      background: radial-gradient(circle at top, var(--bg-2), var(--bg) 55%);
+      color: var(--text);
+      padding: 32px 16px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(11, 33, 52, 0.92);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      color: #f2fbff;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(18, 52, 72, 0.9), rgba(11, 33, 52, 0.92));
+      padding: 18px;
+    }
+
+    .panel h2 {
+      margin: 0 0 16px;
+      font-size: 1.2rem;
+      color: #edfaff;
+    }
+
+    .option-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(14, 39, 52, 0.9);
+      padding: 12px 14px;
+      transition: 0.2s ease;
+    }
+
+    .option:hover {
+      border-color: #7ac7ea;
+      box-shadow: 0 8px 18px rgba(70, 180, 216, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .option input {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .option-text strong {
+      display: block;
+      font-size: 1rem;
+      color: #f2fbff;
+    }
+
+    .option-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 2px;
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pack-name {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      background: var(--input);
+      color: var(--text);
+    }
+
+    .pack-name:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(70, 180, 216, 0.15);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #021b2b;
+      font-weight: 700;
+    }
+
+    .primary-btn:hover {
+      filter: brightness(1.07);
+    }
+
+    .secondary-btn {
+      background: rgba(14, 39, 52, 0.9);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .summary-box {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(58, 112, 100, 0.18);
+      border: 1px solid rgba(114, 240, 200, 0.4);
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .summary-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+    }
+
+    .summary-list li {
+      margin: 6px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 720px) {
+      .builder-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>My Eaglercraft Modpack Builder</h1>
+    <p class="subtitle">Build your custom pack, choose your perks, and download your selection.</p>
+
+    <div class="builder-grid">
+      <section class="panel">
+        <h2>Choose your mods & perks</h2>
+
+        <div class="option-group">
+          <label class="option">
+            <input type="checkbox" value="Custom colors">
+            <div class="option-text">
+              <strong>Custom colors</strong>
+              <span>Changes the UI colors and theme of your pack.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Extra keybinds">
+            <div class="option-text">
+              <strong>Extra keybinds</strong>
+              <span>Adds more hotkeys and controls for gameplay.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Render tweaks">
+            <div class="option-text">
+              <strong>Render tweaks</strong>
+              <span>Improves shading, lighting, and visual performance.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Fast world loading">
+            <div class="option-text">
+              <strong>Fast world loading</strong>
+              <span>Optimizes chunk loading and world startup speed.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Inventory shortcuts">
+            <div class="option-text">
+              <strong>Inventory shortcuts</strong>
+              <span>Quick actions and hotbar shortcuts for easier gameplay.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Mob radar">
+            <div class="option-text">
+              <strong>Mob radar</strong>
+              <span>Helps track entities nearby while playing.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Ambient sounds">
+            <div class="option-text">
+              <strong>Ambient sounds</strong>
+              <span>Adds a richer sound environment and atmosphere.</span>
+            </div>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" value="Low-lag mode">
+            <div class="option-text">
+              <strong>Low-lag mode</strong>
+              <span>Sets easier graphics for smoother gameplay on weaker devices.</span>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <div class="panel">
+          <h2>Pack name</h2>
+          <input
+            id="packName"
+            class="pack-name"
+            type="text"
+            value="My Eaglercraft Pack"
+            placeholder="Enter your pack name"
+          >
+        </div>
+
+        <div class="panel">
+          <h2>Selected pack</h2>
+          <ul id="selectedList" class="summary-list">
+            <li>No mods selected yet</li>
+          </ul>
+
+          <div class="actions">
+            <button id="download" class="primary-btn" type="button">Download pack</button>
+            <button id="reset" class="secondary-btn" type="button">Reset</button>
+          </div>
+
+          <div id="message" class="summary-box hidden" aria-live="polite"></div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const packNameInput = document.querySelector("#packName");
+    const selectedList = document.querySelector("#selectedList");
+    const messageBox = document.querySelector("#message");
+    const downloadBtn = document.querySelector("#download");
+    const resetBtn = document.querySelector("#reset");
+
+    function updateSelectedList() {
+      const checked = [...document.querySelectorAll('input[type="checkbox"]:checked')];
+
+      if (!checked.length) {
+        selectedList.innerHTML = "<li>No mods selected yet</li>";
+        return;
+      }
+
+      selectedList.innerHTML = checked
+        .map(item => `<li>${item.value}</li>`)
+        .join("");
+    }
+
+    function buildPackHTML() {
+      const packName = packNameInput.value.trim() || "My Eaglercraft Pack";
+      const selected = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(box => box.value);
+
+      const list = selected.length
+        ? selected.map(item => `<li>${item}</li>`).join("")
+        : "<li>No mods selected</li>";
+
+      return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${packName}</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 24px;
+      background: radial-gradient(circle at top, #123448, #061a25 55%);
+      color: #e9f7ff;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(15, 42, 56, 0.94), rgba(8, 25, 39, 0.98));
+      border: 1px solid #1d4863;
+      padding: 28px;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      margin-top: 0;
+      color: #f2fbff;
+    }
+    p {
+      color: #9cbfd8;
+    }
+    ul {
+      line-height: 1.8;
+      color: #e9f7ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>${packName}</h1>
+    <p>Generated from your Eaglercraft modpack builder.</p>
+    <ul>${list}</ul>
+  </div>
+</body>
+</html>`;
+    }
+
+    function downloadPack() {
+      const html = buildPackHTML();
+      const blob = new Blob([html], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = (packNameInput.value.trim() || "my-pack") + ".html";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(url);
+
+      const packName = packNameInput.value.trim() || "My Eaglercraft Pack";
+      messageBox.textContent = `Your pack "${packName}" has been downloaded.`;
+      messageBox.classList.remove("hidden");
+    }
+
+    function resetPack() {
+      document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+        input.checked = false;
+      });
+
+      packNameInput.value = "My Eaglercraft Pack";
+      updateSelectedList();
+      messageBox.classList.add("hidden");
+      messageBox.textContent = "";
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+      input.addEventListener("change", updateSelectedList);
+    });
+
+    packNameInput.addEventListener("input", () => {
+      const currentName = packNameInput.value.trim() || "My Eaglercraft Pack";
+      if (!document.querySelectorAll('input[type="checkbox"]:checked').length) {
+        selectedList.innerHTML = "<li>No mods selected yet</li>";
+      } else {
+        updateSelectedList();
+      }
+      messageBox.classList.add("hidden");
+      messageBox.textContent = "";
+    });
+
+    downloadBtn.addEventListener("click", downloadPack);
+    resetBtn.addEventListener("click", resetPack);
+
+    updateSelectedList();
+  </script>
+</body>
+</html>
