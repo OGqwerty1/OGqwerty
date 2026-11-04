@@ -33,7 +33,7 @@
     .pack-row-name { overflow: hidden; font-size: 13px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
     .pack-row-meta { margin-top: 2px; color: #858690; font-size: 11px; }
     .side-actions { display: grid; gap: 8px; margin-top: 12px; }
-    .side-button { width: 100%; display: flex; justify-content: flex-start; align-items: center; gap: 9px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: var(--text); cursor: pointer; font-size: 12px; font-weight: 650; }
+    .side-button { width: 100%; display: flex; justify-content: flex-start; align-items: center; gap: 9px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; }
     .side-button:hover { background: var(--surface-2); }
     .side-button.add { border-color: #3d4d28; color: var(--accent); }
     .sidebar-bottom { margin-top: auto; padding: 16px 8px 0; color: #868791; font-size: 11px; line-height: 1.5; }
@@ -47,14 +47,14 @@
     .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
     h1 { margin: 13px 0 8px; font-size: clamp(30px, 5vw, 48px); line-height: 1.08; letter-spacing: -.045em; }
     .hero p { margin: 0 auto; color: var(--muted); font-size: 14px; }
-    .active-pack-card { width: min(590px, 100%); margin: 30px auto 0; padding: 22px; border: 1px solid #383a42; border-radius: 16px; background: linear-gradient(145deg, #222329, #191a1f); text-align: left; box-shadow: 0 22px 60px #0005; }
+    .active-pack-card { width: min(590px, 100%); margin: 30px auto 0; padding: 22px; border: 1px solid #383a42; border-radius: 16px; background: linear-gradient(145deg, #222329, #191a1f); text-align: left; }
     .pack-heading { display: flex; align-items: center; gap: 14px; }
     .pack-cover { width: 55px; height: 55px; flex: 0 0 55px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(145deg, #414b31, #24291f); font-size: 25px; }
     .pack-title { min-width: 0; flex: 1; }
     .pack-title h2 { overflow: hidden; margin: 0; font-size: 18px; text-overflow: ellipsis; white-space: nowrap; }
     .pack-title span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
     .version-pill { padding: 6px 9px; border: 1px solid var(--line); border-radius: 20px; color: #c9c9d0; font-size: 10px; white-space: nowrap; }
-    .launch-button, .primary-button { width: min(390px, 100%); min-height: 53px; display: flex; justify-content: center; align-items: center; gap: 10px; margin: 22px auto 0; border: 0; border-radius: 10px; background: var(--accent); color: #171a11; cursor: pointer; font-size: 15px; font-weight: 850; transition: .18s ease; }
+    .launch-button, .primary-button { width: min(390px, 100%); min-height: 53px; display: flex; justify-content: center; align-items: center; gap: 10px; margin: 22px auto 0; border: 0; border-radius: 12px; background: var(--accent); color: #11130d; cursor: pointer; font-weight: 800; letter-spacing: .04em; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
     .launch-button:hover, .primary-button:hover { background: #c8ff63; transform: translateY(-1px); box-shadow: 0 8px 30px #b7f34230; }
     .launch-note { margin-top: 11px; color: #82838d; font-size: 11px; text-align: center; }
     .secondary-link { display: block; margin: 15px auto 0; padding: 7px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; }
@@ -63,7 +63,7 @@
     .unmodded-panel[hidden] { display: none; }
     .unmodded-panel label { display: block; margin-bottom: 8px; color: var(--muted); font-size: 11px; font-weight: 650; }
     .version-select { width: 100%; min-height: 42px; padding: 0 11px; border: 1px solid var(--line); border-radius: 8px; background: #101114; color: var(--text); }
-    .unmodded-play { width: 100%; min-height: 42px; margin-top: 9px; border: 1px solid #3d4d28; border-radius: 8px; background: #24271e; color: var(--accent); cursor: pointer; font-size: 12px; font-weight: 750; }
+    .unmodded-play { width: 100%; min-height: 42px; margin-top: 9px; border: 1px solid #3d4d28; border-radius: 8px; background: #24271e; color: var(--accent); cursor: pointer; font-size: 12px; font-weight: 700; }
     .unmodded-play:hover { background: #303824; }
     .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 0 0 16px; }
     .section-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
@@ -89,7 +89,7 @@
     .editor-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
     .status { min-height: 18px; color: var(--muted); font-size: 11px; }
     .delete-button { border: 0; background: transparent; color: var(--danger); cursor: pointer; font-size: 11px; }
-    .toast { position: fixed; right: 20px; bottom: 20px; max-width: min(400px, calc(100vw - 40px)); padding: 13px 16px; border: 1px solid #45474f; border-radius: 10px; background: #23242a; box-shadow: 0 12px 35px #0008; color: var(--text); font-size: 12px; }
+    .toast { position: fixed; right: 20px; bottom: 20px; max-width: min(400px, calc(100vw - 40px)); padding: 13px 16px; border: 1px solid #45474f; border-radius: 10px; background: #23242a; box-shadow: 0 10px 25px rgba(0,0,0,.28); color: var(--text); font-size: 12px; }
     .toast[hidden], [hidden] { display: none !important; }
     @media (max-width: 800px) { .app { grid-template-columns: 215px minmax(0, 1fr); } .feature-grid { grid-template-columns: 1fr; } .feature { min-height: 0; } }
     @media (max-width: 620px) {
@@ -146,16 +146,16 @@
                 <option value="1.12.2">Eaglercraft 1.12.2 (if available in your client)</option>
               </select>
               <button id="playUnmodded" class="unmodded-play" type="button">Play unmodded</button>
-              <div class="launch-note">This site doesn’t have a game client connected yet.</div>
+              <div class="launch-note">This site will open the selected HTML client if it exists in the project.</div>
             </div>
           </div>
         </section>
 
         <section aria-labelledby="featuresTitle">
-          <div class="section-heading"><div><h2 id="featuresTitle">What’s new</h2><p>A few ideas for your next setup.</p></div><button id="addFeature" class="text-button" type="button">Explore options →</button></div>
+          <div class="section-heading"><div><h2 id="featuresTitle">What’s new</h2><p>A few ideas for your next setup.</p></div><button id="addFeature" class="text-button" type="button">Explore ideas</button></div>
           <div class="feature-grid">
             <article class="feature"><div class="feature-icon" aria-hidden="true">🎨</div><h3>Make it yours</h3><p>Choose the client options you want in each saved pack.</p></article>
-            <article class="feature"><div class="feature-icon" aria-hidden="true">📦</div><h3>Keep packs organized</h3><p>Create separate setups for different play styles and switch between them.</p></article>
+            <article class="feature"><div class="feature-icon" aria-hidden="true">📦</div><h3>Keep packs organized</h3><p>Create separate setups for different play styles and switch between them quickly.</p></article>
             <article class="feature"><div class="feature-icon" aria-hidden="true">💾</div><h3>Saved on this device</h3><p>Your pack names and selections stay in this browser using local storage.</p></article>
           </div>
         </section>
@@ -168,9 +168,9 @@
           <p>Give your setup a name and choose the options you want to include.</p>
         </section>
         <section id="editor" class="editor" aria-labelledby="editorTitle">
-          <div class="editor-head"><div><h2 id="editorTitle">Modpack details</h2><p id="editorDescription">Your pack is saved in this browser.</p></div><input id="packName" class="edit-name" type="text" maxlength="48" aria-label="Modpack name" placeholder="Name your modpack"></div>
+          <div class="editor-head"><div><h2 id="editorTitle">Modpack details</h2><p id="editorDescription">Your pack is saved in this browser.</p></div><input id="packName" class="edit-name" type="text" maxlength="48" aria-label="Pack name" placeholder="e.g. Survival+" /></div>
           <div id="options" class="options-grid"></div>
-          <div class="editor-footer"><div id="saveStatus" class="status" aria-live="polite">Choose options, then create your pack.</div><button id="deletePack" class="delete-button" type="button" hidden>Delete this pack</button></div>
+          <div class="editor-footer"><div id="saveStatus" class="status" aria-live="polite">Choose options, then create your pack.</div><button id="deletePack" class="delete-button" type="button" hidden>Delete pack</button></div>
           <button id="createPack" class="primary-button" type="button">Create modpack</button>
         </section>
       </section>
@@ -209,7 +209,6 @@
             name: typeof pack.name === "string" ? pack.name.slice(0, 48) : "Untitled Pack",
             enabled: Array.isArray(pack.enabled) ? pack.enabled.filter(id => OPTIONS.some(option => option.id === id)) : []
           }));
-          // Remove the old starter placeholder; it wasn't a pack the user explicitly created.
           if (packs.length === 1 && packs[0].id === "pack-1" && packs[0].name === "My First Pack" && packs[0].enabled.length === 0) packs = [];
           const activeId = packs.some(pack => pack.id === saved.activeId) ? saved.activeId : (packs[0]?.id || null);
           return { activeId, packs };
@@ -283,8 +282,8 @@
       document.querySelector("#activePackName").textContent = current?.name || "No modpack yet";
       document.querySelector("#activePackMeta").textContent = current ? `Custom setup · ${current.enabled.length} options enabled` : "Create a pack to get started";
       document.querySelector("#launch").innerHTML = current ? '<span aria-hidden="true">▶</span> Launch' : '<span aria-hidden="true">＋</span> Make a modpack';
-      document.querySelector("#launchNote").textContent = current ? "Launch integration isn’t connected yet — this button is a UI placeholder." : "Create your first pack and choose the options for your setup.";
-      document.querySelector("#homeDescription").textContent = current ? "Pick a pack, personalize its options, and get your setup ready to play." : "Create your first pack, or choose a version to play unmodded.";
+      document.querySelector("#launchNote").textContent = current ? "Launch integration isn’t connected yet — this button is a UI placeholder." : "Create your first pack and choose the options you want, then launch when your client is ready.";
+      document.querySelector("#homeDescription").textContent = current ? "Pick a pack, personalize its options, and get your setup ready to play." : "Create your first pack, or choose a version to play unmodded Eaglercraft.";
       document.querySelector("#breadcrumbName").textContent = current?.name || "Home";
       document.querySelector("#exportPack").hidden = !current;
       document.querySelector("#unmoddedToggle").hidden = false;
@@ -309,6 +308,63 @@
       document.querySelector("#duplicatePack").style.opacity = activePack() ? "1" : ".45";
     }
 
+    function resolveClientPath(version) {
+      const baseNames = {
+        "1.8.8": [
+          "1.8.8.html",
+          "1.8.8-wasm.html",
+          "play/1.8.8.html",
+          "play/1.8.8-wasm.html"
+        ],
+        "1.5.2": [
+          "1.5.2.html",
+          "1.5.2-wasm.html",
+          "play/1.5.2.html",
+          "play/1.5.2-wasm.html"
+        ],
+        "1.12.2": [
+          "1.12.2.html",
+          "1.12.2-wasm.html",
+          "play/1.12.2.html",
+          "play/1.12.2-wasm.html"
+        ]
+      };
+      return baseNames[version] || [];
+    }
+
+    function openGameClient(version) {
+      const candidates = resolveClientPath(version);
+      if (!candidates.length) {
+        showToast(`No matching client file was found for ${version}.`);
+        return;
+      }
+
+      let index = 0;
+      const tryNext = () => {
+        if (index >= candidates.length) {
+          showToast(`Could not find a playable ${version} client file in this project.`);
+          return;
+        }
+
+        const path = candidates[index];
+        index += 1;
+
+        fetch(path, { method: "HEAD" })
+          .then(response => {
+            if (response.ok) {
+              window.location.href = path;
+            } else {
+              tryNext();
+            }
+          })
+          .catch(() => {
+            tryNext();
+          });
+      };
+
+      tryNext();
+    }
+
     document.querySelector("#launch").addEventListener("click", () => {
       if (!activePack()) { openCreator(); return; }
       showToast("The launch button is a placeholder for now. This page does not load an Eaglercraft client.");
@@ -322,7 +378,8 @@
     });
     document.querySelector("#playUnmodded").addEventListener("click", () => {
       const version = document.querySelector("#gameVersion").value;
-      showToast(`You selected Eaglercraft ${version}. A compatible game client still needs to be connected before it can launch.`);
+      showToast(`Opening the ${version} client...`);
+      openGameClient(version);
     });
     document.querySelector("#createPack").addEventListener("click", () => {
       const name = packNameInput.value.trim();
