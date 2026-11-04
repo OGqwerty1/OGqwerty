@@ -3,432 +3,303 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Eaglercraft Modpack Builder</title>
+  <meta name="theme-color" content="#101114">
+  <title>OGqwerty — Modpack Studio</title>
   <style>
     :root {
-      --bg: #061a25;
-      --bg-2: #0d2738;
-      --panel: #0b2134;
-      --panel-strong: #123448;
-      --text: #e9f7ff;
-      --muted: #9cbfd8;
-      --primary: #46b4d8;
-      --primary-dark: #2e88a8;
-      --border: #1d4863;
-      --success: #72f0c8;
-      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-      --input: #0d2130;
+      color-scheme: dark;
+      --bg: #101114;
+      --surface: #18191e;
+      --surface-2: #202127;
+      --surface-3: #292a31;
+      --line: #33343d;
+      --text: #f5f5f7;
+      --muted: #a4a5af;
+      --accent: #b7f34a;
+      --accent-dark: #91c92e;
+      --danger: #ff7777;
+      --radius: 14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font: 16px/1.5 system-ui, sans-serif;
-      background: radial-gradient(circle at top, var(--bg-2), var(--bg) 55%);
-      color: var(--text);
-      padding: 32px 16px;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      background: rgba(11, 33, 52, 0.92);
-      border: 1px solid var(--border);
-      padding: 28px;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-
-    h1 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: clamp(2rem, 4vw, 2.7rem);
-      color: #f2fbff;
-    }
-
-    .subtitle {
-      margin-top: 0;
-      margin-bottom: 24px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .builder-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-    }
-
-    .panel {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(18, 52, 72, 0.9), rgba(11, 33, 52, 0.92));
-      padding: 18px;
-    }
-
-    .panel h2 {
-      margin: 0 0 16px;
-      font-size: 1.2rem;
-      color: #edfaff;
-    }
-
-    .option-group {
-      display: grid;
-      gap: 12px;
-    }
-
-    .option {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: rgba(14, 39, 52, 0.9);
-      padding: 12px 14px;
-      transition: 0.2s ease;
-    }
-
-    .option:hover {
-      border-color: #7ac7ea;
-      box-shadow: 0 8px 18px rgba(70, 180, 216, 0.12);
-      transform: translateY(-1px);
-    }
-
-    .option input {
-      margin-top: 3px;
-      accent-color: var(--primary);
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-    .option-text strong {
-      display: block;
-      font-size: 1rem;
-      color: #f2fbff;
-    }
-
-    .option-text span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: 2px;
-    }
-
-    .side-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .pack-name {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 1rem;
-      outline: none;
-      background: var(--input);
-      color: var(--text);
-    }
-
-    .pack-name:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(70, 180, 216, 0.15);
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .primary-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #021b2b;
-      font-weight: 700;
-    }
-
-    .primary-btn:hover {
-      filter: brightness(1.07);
-    }
-
-    .secondary-btn {
-      background: rgba(14, 39, 52, 0.9);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .summary-box {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: rgba(58, 112, 100, 0.18);
-      border: 1px solid rgba(114, 240, 200, 0.4);
-      color: var(--success);
-      font-weight: 600;
-    }
-
-    .summary-list {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text);
-    }
-
-    .summary-list li {
-      margin: 6px 0;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    @media (max-width: 720px) {
-      .builder-grid {
-        grid-template-columns: 1fr;
-      }
+    body { margin: 0; min-height: 100vh; color: var(--text); background: var(--bg); }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .app { min-height: 100vh; display: grid; grid-template-columns: 258px minmax(0, 1fr); }
+    .sidebar { display: flex; flex-direction: column; min-height: 100vh; padding: 24px 16px; background: #15161a; border-right: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 4px 8px 26px; }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--accent); color: #14160f; font-weight: 950; font-size: 19px; }
+    .brand-name { font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+    .brand-caption { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .side-label { padding: 0 9px; margin: 5px 0 10px; color: #858690; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .pack-list { display: grid; gap: 6px; }
+    .pack-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--muted); text-align: left; cursor: pointer; }
+    .pack-row:hover { background: var(--surface-2); color: var(--text); }
+    .pack-row.active { background: #24271e; border-color: #3a4627; color: var(--text); }
+    .pack-icon { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; border-radius: 8px; background: var(--surface-3); font-size: 14px; }
+    .pack-row.active .pack-icon { background: #394526; }
+    .pack-row-name { overflow: hidden; font-size: 13px; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+    .pack-row-meta { margin-top: 2px; color: #858690; font-size: 11px; }
+    .side-actions { display: grid; gap: 8px; margin-top: 12px; }
+    .side-button { width: 100%; display: flex; justify-content: flex-start; align-items: center; gap: 9px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: var(--text); cursor: pointer; font-size: 12px; font-weight: 650; }
+    .side-button:hover { background: var(--surface-2); }
+    .side-button.add { border-color: #3d4d28; color: var(--accent); }
+    .sidebar-bottom { margin-top: auto; padding: 16px 8px 0; color: #868791; font-size: 11px; line-height: 1.5; }
+    main { width: min(1120px, 100%); margin: 0 auto; padding: 28px clamp(20px, 5vw, 64px) 56px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 48px; }
+    .crumb { color: var(--muted); font-size: 13px; }
+    .top-actions { display: flex; gap: 9px; }
+    .icon-button { min-width: 38px; height: 38px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--muted); cursor: pointer; }
+    .icon-button:hover { color: var(--text); background: var(--surface-2); }
+    .hero { max-width: 760px; margin: 0 auto 54px; text-align: center; }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 13px 0 8px; font-size: clamp(30px, 5vw, 48px); line-height: 1.08; letter-spacing: -.045em; }
+    .hero p { margin: 0 auto; color: var(--muted); font-size: 14px; }
+    .active-pack-card { width: min(590px, 100%); margin: 30px auto 0; padding: 22px; border: 1px solid #383a42; border-radius: 16px; background: linear-gradient(145deg, #222329, #191a1f); text-align: left; box-shadow: 0 22px 60px #0005; }
+    .pack-heading { display: flex; align-items: center; gap: 14px; }
+    .pack-cover { width: 55px; height: 55px; flex: 0 0 55px; display: grid; place-items: center; border-radius: 12px; background: linear-gradient(145deg, #414b31, #24291f); font-size: 25px; }
+    .pack-title { min-width: 0; flex: 1; }
+    .pack-title h2 { overflow: hidden; margin: 0; font-size: 18px; text-overflow: ellipsis; white-space: nowrap; }
+    .pack-title span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .version-pill { padding: 6px 9px; border: 1px solid var(--line); border-radius: 20px; color: #c9c9d0; font-size: 10px; white-space: nowrap; }
+    .launch-button { width: min(390px, 100%); min-height: 53px; display: flex; justify-content: center; align-items: center; gap: 10px; margin: 22px auto 0; border: 0; border-radius: 10px; background: var(--accent); color: #171a11; cursor: pointer; font-size: 15px; font-weight: 850; transition: .18s ease; }
+    .launch-button:hover { background: #c8ff63; transform: translateY(-1px); box-shadow: 0 8px 30px #b7f34230; }
+    .launch-note { margin-top: 11px; color: #82838d; font-size: 11px; text-align: center; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin: 0 0 16px; }
+    .section-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.02em; }
+    .section-heading p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .text-button { padding: 7px 0; border: 0; background: transparent; color: var(--accent); cursor: pointer; font-size: 12px; font-weight: 700; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .feature { min-height: 148px; padding: 17px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .feature-icon { width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 15px; border-radius: 9px; background: #292b30; font-size: 16px; }
+    .feature h3 { margin: 0 0 5px; font-size: 13px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .editor { margin-top: 36px; padding: 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .editor-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; margin-bottom: 17px; }
+    .editor-head h2 { margin: 0; font-size: 16px; }
+    .editor-head p { margin: 4px 0 0; color: var(--muted); font-size: 11px; }
+    .edit-name { width: min(310px, 100%); padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; outline: 0; background: #111216; color: var(--text); font-size: 13px; }
+    .edit-name:focus { border-color: var(--accent-dark); }
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .option { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid #303138; border-radius: 9px; background: #1d1e23; cursor: pointer; }
+    .option:hover { border-color: #50534a; }
+    .option input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--accent); }
+    .option strong { display: block; font-size: 12px; }
+    .option small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .editor-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; }
+    .status { min-height: 18px; color: var(--muted); font-size: 11px; }
+    .delete-button { border: 0; background: transparent; color: var(--danger); cursor: pointer; font-size: 11px; }
+    .toast { position: fixed; right: 20px; bottom: 20px; max-width: min(400px, calc(100vw - 40px)); padding: 13px 16px; border: 1px solid #45474f; border-radius: 10px; background: #23242a; box-shadow: 0 12px 35px #0008; color: var(--text); font-size: 12px; }
+    .toast[hidden] { display: none; }
+    @media (max-width: 800px) { .app { grid-template-columns: 215px minmax(0, 1fr); } .feature-grid { grid-template-columns: 1fr; } .feature { min-height: 0; } }
+    @media (max-width: 620px) {
+      .app { display: block; }
+      .sidebar { min-height: 0; padding: 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .brand { padding: 4px 5px 12px; }
+      .side-label, .sidebar-bottom { display: none; }
+      .pack-list { display: flex; overflow-x: auto; padding-bottom: 4px; }
+      .pack-row { width: auto; min-width: 145px; }
+      .side-actions { grid-template-columns: 1fr 1fr; margin-top: 7px; }
+      .side-button { justify-content: center; padding: 9px 5px; font-size: 11px; }
+      main { padding: 19px 16px 40px; }
+      .topbar { margin-bottom: 34px; }
+      .hero { margin-bottom: 38px; }
+      .editor-head { flex-direction: column; }
+      .edit-name { width: 100%; }
+      .options-grid { grid-template-columns: 1fr; }
+      .version-pill { display: none; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>My Eaglercraft Modpack Builder</h1>
-    <p class="subtitle">Build your custom pack, choose your perks, and download your selection.</p>
+  <div class="app">
+    <aside class="sidebar" aria-label="Modpack navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">O</div>
+        <div><div class="brand-name">OGQWERTY</div><div class="brand-caption">MODPACK STUDIO</div></div>
+      </div>
+      <div class="side-label">Your modpacks</div>
+      <nav id="packList" class="pack-list" aria-label="Your modpacks"></nav>
+      <div class="side-actions">
+        <button id="newPack" class="side-button add" type="button"><span aria-hidden="true">＋</span> New modpack</button>
+        <button id="duplicatePack" class="side-button" type="button"><span aria-hidden="true">▣</span> Duplicate</button>
+      </div>
+      <div class="sidebar-bottom">Your pack settings are saved in this browser. This builder is a prototype, not a game client.</div>
+    </aside>
 
-    <div class="builder-grid">
-      <section class="panel">
-        <h2>Choose your mods & perks</h2>
+    <main>
+      <header class="topbar">
+        <div class="crumb">Modpacks <span aria-hidden="true">/</span> <strong id="breadcrumbName">My First Pack</strong></div>
+        <div class="top-actions"><button id="exportPack" class="icon-button" type="button" title="Export your pack settings">Export pack</button></div>
+      </header>
 
-        <div class="option-group">
-          <label class="option">
-            <input type="checkbox" value="Custom colors">
-            <div class="option-text">
-              <strong>Custom colors</strong>
-              <span>Changes the UI colors and theme of your pack.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Extra keybinds">
-            <div class="option-text">
-              <strong>Extra keybinds</strong>
-              <span>Adds more hotkeys and controls for gameplay.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Render tweaks">
-            <div class="option-text">
-              <strong>Render tweaks</strong>
-              <span>Improves shading, lighting, and visual performance.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Fast world loading">
-            <div class="option-text">
-              <strong>Fast world loading</strong>
-              <span>Optimizes chunk loading and world startup speed.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Inventory shortcuts">
-            <div class="option-text">
-              <strong>Inventory shortcuts</strong>
-              <span>Quick actions and hotbar shortcuts for easier gameplay.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Mob radar">
-            <div class="option-text">
-              <strong>Mob radar</strong>
-              <span>Helps track entities nearby while playing.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Ambient sounds">
-            <div class="option-text">
-              <strong>Ambient sounds</strong>
-              <span>Adds a richer sound environment and atmosphere.</span>
-            </div>
-          </label>
-
-          <label class="option">
-            <input type="checkbox" value="Low-lag mode">
-            <div class="option-text">
-              <strong>Low-lag mode</strong>
-              <span>Sets easier graphics for smoother gameplay on weaker devices.</span>
-            </div>
-          </label>
+      <section class="hero" aria-labelledby="pageTitle">
+        <div class="eyebrow">Your game, your setup</div>
+        <h1 id="pageTitle">Ready when you are.</h1>
+        <p>Pick a pack, personalize its options, and get your setup ready to play.</p>
+        <div class="active-pack-card">
+          <div class="pack-heading">
+            <div class="pack-cover" aria-hidden="true">⚒</div>
+            <div class="pack-title"><h2 id="activePackName">My First Pack</h2><span id="activePackMeta">Custom setup · 0 options enabled</span></div>
+            <span class="version-pill">Eaglercraft setup</span>
+          </div>
+          <button id="launch" class="launch-button" type="button"><span aria-hidden="true">▶</span> Launch</button>
+          <div class="launch-note">Launch integration isn’t connected yet — this button is a UI placeholder.</div>
         </div>
       </section>
 
-      <aside class="side-panel">
-        <div class="panel">
-          <h2>Pack name</h2>
-          <input
-            id="packName"
-            class="pack-name"
-            type="text"
-            value="My Eaglercraft Pack"
-            placeholder="Enter your pack name"
-          >
+      <section aria-labelledby="featuresTitle">
+        <div class="section-heading"><div><h2 id="featuresTitle">What’s new</h2><p>A few ideas for your next setup.</p></div><button id="addFeature" class="text-button" type="button">Explore options →</button></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="feature-icon" aria-hidden="true">🎨</div><h3>Make it yours</h3><p>Choose the client options you want in each saved pack.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">📦</div><h3>Keep packs organized</h3><p>Create separate setups for different play styles and switch between them.</p></article>
+          <article class="feature"><div class="feature-icon" aria-hidden="true">💾</div><h3>Saved on this device</h3><p>Your pack names and selections stay in this browser using local storage.</p></article>
         </div>
+      </section>
 
-        <div class="panel">
-          <h2>Selected pack</h2>
-          <ul id="selectedList" class="summary-list">
-            <li>No mods selected yet</li>
-          </ul>
-
-          <div class="actions">
-            <button id="download" class="primary-btn" type="button">Download pack</button>
-            <button id="reset" class="secondary-btn" type="button">Reset</button>
-          </div>
-
-          <div id="message" class="summary-box hidden" aria-live="polite"></div>
-        </div>
-      </aside>
-    </div>
-  </main>
+      <section id="editor" class="editor" aria-labelledby="editorTitle">
+        <div class="editor-head"><div><h2 id="editorTitle">Edit modpack</h2><p>Rename this pack and choose its options.</p></div><input id="packName" class="edit-name" type="text" maxlength="48" aria-label="Modpack name" placeholder="Name your modpack"></div>
+        <div id="options" class="options-grid"></div>
+        <div class="editor-footer"><div id="saveStatus" class="status" aria-live="polite">Changes save automatically.</div><button id="deletePack" class="delete-button" type="button">Delete this pack</button></div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
   <script>
+    const STORAGE_KEY = "ogqwerty-modpack-studio-v1";
+    const OPTIONS = [
+      { id: "custom-colors", name: "Custom colors", description: "Personalize the interface theme." },
+      { id: "extra-keybinds", name: "Extra keybinds", description: "A place to configure additional controls." },
+      { id: "render-tweaks", name: "Render tweaks", description: "Visual settings for your setup." },
+      { id: "fast-loading", name: "Fast world loading", description: "A performance preference for your pack." },
+      { id: "inventory-shortcuts", name: "Inventory shortcuts", description: "Quick-access control preferences." },
+      { id: "ambient-sounds", name: "Ambient sounds", description: "An audio preference for your setup." },
+      { id: "low-lag", name: "Low-lag mode", description: "A lighter-graphics preference." }
+    ];
+    const defaultState = { activeId: "pack-1", packs: [{ id: "pack-1", name: "My First Pack", enabled: [] }] };
+    let state = loadState();
+    let toastTimer;
+
+    const packList = document.querySelector("#packList");
     const packNameInput = document.querySelector("#packName");
-    const selectedList = document.querySelector("#selectedList");
-    const messageBox = document.querySelector("#message");
-    const downloadBtn = document.querySelector("#download");
-    const resetBtn = document.querySelector("#reset");
+    const optionsContainer = document.querySelector("#options");
+    const toast = document.querySelector("#toast");
 
-    function updateSelectedList() {
-      const checked = [...document.querySelectorAll('input[type="checkbox"]:checked')];
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved && Array.isArray(saved.packs) && saved.packs.length) {
+          saved.packs = saved.packs.filter(pack => pack && typeof pack.id === "string").map(pack => ({
+            id: pack.id,
+            name: typeof pack.name === "string" ? pack.name.slice(0, 48) : "Untitled Pack",
+            enabled: Array.isArray(pack.enabled) ? pack.enabled.filter(id => OPTIONS.some(option => option.id === id)) : []
+          }));
+          if (saved.packs.length) {
+            if (!saved.packs.some(pack => pack.id === saved.activeId)) saved.activeId = saved.packs[0].id;
+            return saved;
+          }
+        }
+      } catch (error) { /* Start with a clean pack if saved data is unavailable. */ }
+      return structuredClone(defaultState);
+    }
 
-      if (!checked.length) {
-        selectedList.innerHTML = "<li>No mods selected yet</li>";
-        return;
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        document.querySelector("#saveStatus").textContent = "All changes saved.";
+      } catch (error) {
+        document.querySelector("#saveStatus").textContent = "Could not save in this browser.";
       }
-
-      selectedList.innerHTML = checked
-        .map(item => `<li>${item.value}</li>`)
-        .join("");
     }
 
-    function buildPackHTML() {
-      const packName = packNameInput.value.trim() || "My Eaglercraft Pack";
-      const selected = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(box => box.value);
+    function activePack() { return state.packs.find(pack => pack.id === state.activeId) || state.packs[0]; }
+    function makeId() { return "pack-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
-      const list = selected.length
-        ? selected.map(item => `<li>${item}</li>`).join("")
-        : "<li>No mods selected</li>";
-
-      return `<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${packName}</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 24px;
-      background: radial-gradient(circle at top, #123448, #061a25 55%);
-      color: #e9f7ff;
-    }
-    .card {
-      background: linear-gradient(180deg, rgba(15, 42, 56, 0.94), rgba(8, 25, 39, 0.98));
-      border: 1px solid #1d4863;
-      padding: 28px;
-      border-radius: 16px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-    }
-    h1 {
-      margin-top: 0;
-      color: #f2fbff;
-    }
-    p {
-      color: #9cbfd8;
-    }
-    ul {
-      line-height: 1.8;
-      color: #e9f7ff;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>${packName}</h1>
-    <p>Generated from your Eaglercraft modpack builder.</p>
-    <ul>${list}</ul>
-  </div>
-</body>
-</html>`;
-    }
-
-    function downloadPack() {
-      const html = buildPackHTML();
-      const blob = new Blob([html], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = (packNameInput.value.trim() || "my-pack") + ".html";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      URL.revokeObjectURL(url);
-
-      const packName = packNameInput.value.trim() || "My Eaglercraft Pack";
-      messageBox.textContent = `Your pack "${packName}" has been downloaded.`;
-      messageBox.classList.remove("hidden");
-    }
-
-    function resetPack() {
-      document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-        input.checked = false;
+    function render() {
+      const current = activePack();
+      state.activeId = current.id;
+      packList.replaceChildren();
+      state.packs.forEach(pack => {
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = "pack-row" + (pack.id === current.id ? " active" : "");
+        row.setAttribute("aria-current", pack.id === current.id ? "page" : "false");
+        const icon = document.createElement("span"); icon.className = "pack-icon"; icon.setAttribute("aria-hidden", "true"); icon.textContent = "⚒";
+        const copy = document.createElement("span"); copy.style.minWidth = "0";
+        const name = document.createElement("span"); name.className = "pack-row-name"; name.textContent = pack.name || "Untitled Pack";
+        const meta = document.createElement("span"); meta.className = "pack-row-meta"; meta.textContent = `${pack.enabled.length} options enabled`;
+        copy.append(name, meta); row.append(icon, copy);
+        row.addEventListener("click", () => { state.activeId = pack.id; render(); });
+        packList.append(row);
       });
 
-      packNameInput.value = "My Eaglercraft Pack";
-      updateSelectedList();
-      messageBox.classList.add("hidden");
-      messageBox.textContent = "";
+      document.querySelector("#activePackName").textContent = current.name || "Untitled Pack";
+      document.querySelector("#breadcrumbName").textContent = current.name || "Untitled Pack";
+      document.querySelector("#activePackMeta").textContent = `Custom setup · ${current.enabled.length} options enabled`;
+      packNameInput.value = current.name;
+      optionsContainer.replaceChildren();
+      OPTIONS.forEach(option => {
+        const label = document.createElement("label"); label.className = "option";
+        const checkbox = document.createElement("input"); checkbox.type = "checkbox"; checkbox.checked = current.enabled.includes(option.id); checkbox.setAttribute("aria-label", option.name);
+        checkbox.addEventListener("change", () => {
+          current.enabled = checkbox.checked ? [...new Set([...current.enabled, option.id])] : current.enabled.filter(id => id !== option.id);
+          saveState(); render();
+        });
+        const text = document.createElement("span");
+        const strong = document.createElement("strong"); strong.textContent = option.name;
+        const desc = document.createElement("small"); desc.textContent = option.description;
+        text.append(strong, desc); label.append(checkbox, text); optionsContainer.append(label);
+      });
+      document.querySelector("#deletePack").disabled = state.packs.length < 2;
+      document.querySelector("#deletePack").style.opacity = state.packs.length < 2 ? ".45" : "1";
     }
 
-    document.querySelectorAll('input[type="checkbox"]').forEach(input => {
-      input.addEventListener("change", updateSelectedList);
-    });
+    function showToast(message) {
+      toast.textContent = message;
+      toast.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { toast.hidden = true; }, 4000);
+    }
+
+    function addPack(name = "New Modpack", enabled = []) {
+      const pack = { id: makeId(), name, enabled: [...enabled] };
+      state.packs.push(pack); state.activeId = pack.id; saveState(); render();
+      packNameInput.focus(); packNameInput.select();
+    }
 
     packNameInput.addEventListener("input", () => {
-      const currentName = packNameInput.value.trim() || "My Eaglercraft Pack";
-      if (!document.querySelectorAll('input[type="checkbox"]:checked').length) {
-        selectedList.innerHTML = "<li>No mods selected yet</li>";
-      } else {
-        updateSelectedList();
-      }
-      messageBox.classList.add("hidden");
-      messageBox.textContent = "";
+      const current = activePack(); current.name = packNameInput.value.slice(0, 48);
+      document.querySelector("#activePackName").textContent = current.name || "Untitled Pack";
+      document.querySelector("#breadcrumbName").textContent = current.name || "Untitled Pack";
+      const row = [...packList.children].find(button => button.classList.contains("active"));
+      if (row) row.querySelector(".pack-row-name").textContent = current.name || "Untitled Pack";
+      saveState();
     });
 
-    downloadBtn.addEventListener("click", downloadPack);
-    resetBtn.addEventListener("click", resetPack);
+    document.querySelector("#newPack").addEventListener("click", () => addPack());
+    document.querySelector("#duplicatePack").addEventListener("click", () => {
+      const current = activePack(); addPack(`${current.name || "Untitled Pack"} Copy`, current.enabled);
+    });
+    document.querySelector("#deletePack").addEventListener("click", () => {
+      if (state.packs.length < 2) return;
+      const current = activePack();
+      if (!confirm(`Delete “${current.name || "Untitled Pack"}”? This only removes its saved settings from this browser.`)) return;
+      state.packs = state.packs.filter(pack => pack.id !== current.id); state.activeId = state.packs[0].id; saveState(); render();
+    });
+    document.querySelector("#launch").addEventListener("click", () => showToast("The launch button is a placeholder for now. This page does not load or modify an Eaglercraft client."));
+    document.querySelector("#addFeature").addEventListener("click", () => document.querySelector("#editor").scrollIntoView({ behavior: "smooth", block: "start" }));
+    document.querySelector("#exportPack").addEventListener("click", () => {
+      const current = activePack();
+      const file = new Blob([JSON.stringify({ format: "ogqwerty-modpack", version: 1, name: current.name, enabledOptions: current.enabled }, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(file);
+      const link = document.createElement("a"); link.href = url; link.download = (current.name || "modpack").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".json";
+      document.body.append(link); link.click(); link.remove(); URL.revokeObjectURL(url);
+      showToast("Pack settings exported as JSON. This does not include game files or mods.");
+    });
 
-    updateSelectedList();
+    saveState();
+    render();
   </script>
 </body>
 </html>
