@@ -310,24 +310,9 @@
 
     function resolveClientPath(version) {
       const baseNames = {
-        "1.8.8": [
-          "1.8.8.html",
-          "1.8.8-wasm.html",
-          "play/1.8.8.html",
-          "play/1.8.8-wasm.html"
-        ],
-        "1.5.2": [
-          "1.5.2.html",
-          "1.5.2-wasm.html",
-          "play/1.5.2.html",
-          "play/1.5.2-wasm.html"
-        ],
-        "1.12.2": [
-          "1.12.2.html",
-          "1.12.2-wasm.html",
-          "play/1.12.2.html",
-          "play/1.12.2-wasm.html"
-        ]
+        "1.8.8": ["1.8.8.html", "1.8.8-wasm.html", "play/1.8.8.html", "play/1.8.8-wasm.html"],
+        "1.5.2": ["1.5.2.html", "1.5.2-wasm.html", "play/1.5.2.html", "play/1.5.2-wasm.html"],
+        "1.12.2": ["1.12.2.html", "1.12.2-wasm.html", "play/1.12.2.html", "play/1.12.2-wasm.html"]
       };
       return baseNames[version] || [];
     }
@@ -345,23 +330,11 @@
           showToast(`Could not find a playable ${version} client file in this project.`);
           return;
         }
-
-        const path = candidates[index];
-        index += 1;
-
+        const path = candidates[index++];
         fetch(path, { method: "HEAD" })
-          .then(response => {
-            if (response.ok) {
-              window.location.href = path;
-            } else {
-              tryNext();
-            }
-          })
-          .catch(() => {
-            tryNext();
-          });
+          .then(response => response.ok ? window.location.assign(path) : tryNext())
+          .catch(tryNext);
       };
-
       tryNext();
     }
 
