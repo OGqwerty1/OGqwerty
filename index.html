@@ -1,41 +1,496 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101114"><title>OGqwerty — Modpack Studio</title>
-<style>
-:root{color-scheme:dark;--bg:#101114;--surface:#18191e;--surface2:#202127;--line:#33343d;--text:#f5f5f7;--muted:#a4a5af;--accent:#b7f34a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text)}button,input,select{font:inherit}button{color:inherit;cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:258px minmax(0,1fr)}aside{display:flex;flex-direction:column;min-height:100vh;padding:24px 16px;background:#15161a;border-right:1px solid var(--line)}.brand{display:flex;gap:11px;align-items:center;padding:4px 8px 26px}.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--accent);color:#14160f;font-weight:950;font-size:19px}.brand-name{font-size:15px;font-weight:800;letter-spacing:.04em}.brand-caption{margin-top:2px;color:var(--muted);font-size:11px}.side-label{margin:5px 0 10px;padding:0 9px;color:#858690;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.pack-list{display:grid;gap:6px}.pack-row,.side-button{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);text-align:left}.pack-row:hover,.side-button:hover{background:var(--surface2);color:var(--text)}.pack-row.active{background:#24271e;border-color:#3a4627;color:var(--text)}.pack-row-name{font-size:13px;font-weight:650}.pack-row-meta{margin-top:2px;color:#858690;font-size:11px}.side-actions{display:grid;gap:8px;margin-top:12px}.side-button{border-color:var(--line)}.side-button.add{border-color:#3d4d28;color:var(--accent)}.sidebar-bottom{margin-top:auto;padding:16px 8px 0;color:#868791;font-size:11px;line-height:1.5}main{width:min(1240px,100%);margin:0 auto;padding:28px clamp(20px,5vw,64px) 56px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:48px;color:var(--muted);font-size:13px}.top-actions{display:flex;align-items:center;gap:9px}.icon-button{min-height:38px;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}.profile-wrap{position:relative}.profile-trigger{display:flex;align-items:center;gap:9px;min-height:42px;padding:5px 12px 5px 7px;border:1px solid #46532f;border-radius:12px;background:linear-gradient(135deg,#24271e,#1b1c20);color:var(--text);font-size:12px;font-weight:700;box-shadow:0 0 0 1px #b7f34a12}.profile-trigger:hover{border-color:var(--accent)}.profile-avatar{width:29px;height:29px;display:grid;place-items:center;overflow:hidden;border-radius:8px;background:#33372b;color:var(--accent);font-size:16px}.profile-avatar img{width:100%;height:100%;object-fit:cover}.profile-caret{color:var(--accent);font-size:11px}.profile-popover{position:absolute;z-index:5;top:calc(100% + 10px);right:0;width:min(350px,calc(100vw - 32px));padding:17px;border:1px solid #42444d;border-radius:14px;background:#1a1b20;box-shadow:0 18px 50px #0009;text-align:left}.profile-popover h2{margin:0 0 4px;font-size:16px}.profile-help{margin:0 0 14px;color:var(--muted);font-size:11px;line-height:1.45}.profile-field{display:grid;gap:6px;margin:12px 0}.profile-field label{color:#d7d7dc;font-size:11px;font-weight:700}.profile-field input,.profile-field select{width:100%;min-height:39px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#111216;color:var(--text)}.skin-row{display:flex;align-items:center;gap:12px}.skin-preview{width:52px;height:52px;display:grid;place-items:center;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#24252b;color:var(--muted);font-size:10px;text-align:center}.skin-preview img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}.skin-input-wrap{min-width:0;flex:1}.profile-note{margin:10px 0;color:#92939d;font-size:10px;line-height:1.45}.profile-save{width:100%;min-height:39px;border:0;border-radius:8px;background:var(--accent);color:#12140d;font-size:12px;font-weight:800}.hero{max-width:1120px;margin:0 auto 54px;text-align:center}.eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{margin:13px 0 8px;font-size:clamp(30px,5vw,48px);line-height:1.08}.hero>p{color:var(--muted);font-size:14px}.active-pack-card{width:min(590px,100%);margin:30px auto 0;padding:22px;border:1px solid #383a42;border-radius:16px;background:linear-gradient(145deg,#222329,#191a1f);text-align:left}.pack-heading{display:flex;align-items:center;gap:14px}.pack-cover{width:55px;height:55px;display:grid;place-items:center;border-radius:12px;background:#343d29;font-size:25px}.pack-title{min-width:0;flex:1}.pack-title h2{margin:0;overflow:hidden;font-size:18px;text-overflow:ellipsis;white-space:nowrap}.pack-title span{display:block;margin-top:4px;color:var(--muted);font-size:12px}.version-pill{padding:6px 9px;border:1px solid var(--line);border-radius:20px;color:#c9c9d0;font-size:10px}.launch-button,.primary-button{width:min(390px,100%);min-height:53px;display:flex;justify-content:center;align-items:center;gap:10px;margin:22px auto 0;border:0;border-radius:12px;background:var(--accent);color:#11130d;font-weight:800}.launch-button:hover,.primary-button:hover{background:#c8ff63}.launch-note{margin-top:11px;color:#82838d;font-size:11px;text-align:center}.unmodded-panel{width:min(390px,100%);margin:18px auto 0;padding:14px;border:1px solid var(--line);border-radius:10px;background:#17181d}.unmodded-panel label{display:block;margin-bottom:8px;color:var(--muted);font-size:11px;font-weight:650}.version-select{width:100%;min-height:42px;padding:0 11px;border:1px solid var(--line);border-radius:8px;background:#101114;color:var(--text)}.unmodded-play{width:100%;min-height:42px;margin-top:9px;border:1px solid #3d4d28;border-radius:8px;background:#24271e;color:var(--accent);font-size:12px;font-weight:700}.server-panel{width:100%;margin:20px auto 0;padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--surface);text-align:left}.server-caption{margin:0 0 13px;color:var(--muted);font-size:11px;text-align:center}.server-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px}.server-copy{width:100%;min-height:58px;padding:10px 12px;border:1px solid #393b44;border-radius:9px;background:#202127;color:var(--text);text-align:left}.server-copy:hover{border-color:var(--accent);background:#262a20}.server-copy strong,.server-copy span{display:block}.server-copy strong{font-size:12px}.server-copy span{margin-top:4px;color:var(--muted);font-size:10px}.server-source{margin:12px 0 0;color:#82838d;font-size:10px;text-align:center}.server-source a{color:#b9c68e}.section-heading{margin:0 0 16px;text-align:left}.section-heading h2{margin:0;font-size:19px}.section-heading p,.feature p{color:var(--muted);font-size:12px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.feature{min-height:148px;padding:17px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.editor{margin-top:36px;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-align:left}.editor-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:17px}.edit-name{width:min(310px,100%);padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#111216;color:var(--text)}.options-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.option{display:flex;gap:10px;padding:12px;border:1px solid #303138;border-radius:9px;background:#1d1e23;font-size:12px}.editor-footer{display:flex;justify-content:space-between;align-items:center;margin-top:16px;color:var(--muted);font-size:11px}.delete-button{border:0;background:transparent;color:#ff7777}.toast{position:fixed;right:20px;bottom:20px;z-index:10;padding:13px 16px;border:1px solid #45474f;border-radius:10px;background:#23242a}.toast[hidden],[hidden]{display:none!important}@media(max-width:800px){.feature-grid{grid-template-columns:1fr}}@media(max-width:620px){.app{display:block}aside{min-height:0;padding:12px;border-right:0;border-bottom:1px solid var(--line)}.brand{padding:4px 5px 12px}.side-label,.sidebar-bottom{display:none}.pack-list{display:flex;overflow:auto}.pack-row{min-width:145px}.side-actions{grid-template-columns:1fr 1fr}.side-button{justify-content:center}main{padding:19px 16px 40px}.topbar{align-items:flex-start;margin-bottom:34px}.top-actions{flex-wrap:wrap;justify-content:flex-end}.profile-trigger{min-height:39px}.hero{margin-bottom:38px}.editor-head{align-items:flex-start;flex-direction:column}.edit-name{width:100%}.options-grid{grid-template-columns:1fr}.version-pill{display:none}.server-panel{padding:13px}.server-list{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <title>OGqwerty — Modpack Studio</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101114;--surface:#18191e;--surface2:#202127;--line:#33343d;--text:#f5f5f7;--muted:#a4a5af;--accent:#b7f34a;--accent2:#5ec4ff;--danger:#ff6d6d;--shadow:0 18px 40px rgba(0,0,0,.35);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;box-sizing:border-box}
+    *{box-sizing:border-box}html,body{margin:0;height:100%;background:var(--bg);color:var(--text)}body{min-height:100vh}
+    button,input,select{font:inherit}button{cursor:pointer}
+    .app{min-height:100vh;display:grid;grid-template-columns:260px minmax(0,1fr)}
+    aside{display:flex;flex-direction:column;min-height:100vh;padding:24px 16px;background:#1516a1;border-right:1px solid var(--line)}
+    .brand{display:flex;gap:11px;align-items:center;padding:4px 8px 26px}
+    .brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--accent);color:#14160f;font-weight:950;font-size:19px}
+    .brand-name{font-size:15px;font-weight:800;letter-spacing:.04em}
+    .brand-caption{margin-top:2px;color:var(--muted);font-size:11px}
+    .side-label{margin:5px 0 10px;padding:0 9px;color:#858690;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    .pack-list{display:grid;gap:6px}
+    .pack-row,.side-button{width:100%;display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);text-align:left}
+    .pack-row:hover,.side-button:hover{background:var(--surface2);color:var(--text)}
+    .pack-row.active{background:#24271e;border-color:#3a4627;color:var(--text)}
+    .pack-row-name{font-size:13px;font-weight:650}.pack-row-meta{margin-top:2px;color:#858690;font-size:11px}
+    .side-actions{display:grid;gap:8px;margin-top:12px}.side-button.add{border-color:#3d4d28;color:var(--accent)}.side-button{justify-content:center}
+    .sidebar-bottom{margin-top:auto;padding:16px 8px 0;color:#868791;font-size:11px;line-height:1.5}
+    main{padding:28px 0 48px}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin:0 auto 48px;width:min(1120px,100%);padding:0 24px;color:var(--muted);font-size:13px}
+    .top-actions{display:flex;gap:9px}.icon-button{min-height:38px;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--text)}
+    .page{width:min(1120px,100%);margin:0 auto;padding:0 24px}.hero{max-width:1120px;margin:0 auto 36px;text-align:center}
+    .eyebrow{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    h1{margin:12px 0 8px;font-size:clamp(30px,5vw,48px);line-height:1.08}
+    #homeDescription{color:var(--muted);font-size:14px}
+    .active-pack-card{width:min(590px,100%);margin:28px auto 0;padding:22px;border:1px solid rgba(56,58,72,.9);border-radius:16px;background:linear-gradient(145deg,#222329,#191a1f);text-align:left;box-shadow:var(--shadow)}
+    .pack-header{display:flex;align-items:center;gap:16px}
+    .pack-cover{width:55px;height:55px;display:grid;place-items:center;border-radius:12px;background:#343d29;color:var(--accent);font-weight:800;font-size:25px}
+    .pack-title{margin:0;display:flex;align-items:center;gap:8px}.pack-title h2{margin:0;font-size:18px}.pack-title span{color:var(--muted);font-size:11px}
+    .pack-meta{margin-top:4px;color:var(--muted);font-size:12px}
+    .launch-row{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .launch-button,.primary-button,.secondary-button,.danger-button{display:inline-flex;align-items:center;justify-content:center;min-width:min(390px,100%);min-height:53px;padding:0 18px;border:0;border-radius:12px;background:var(--accent);color:#11130d;font-weight:800}
+    .launch-button:hover,.primary-button:hover,.secondary-button:hover,.danger-button:hover{filter:brightness(1.05)}
+    .launch-note{margin-top:12px;color:#82839a;font-size:11px;text-align:center}
+    .unmodded-panel{width:min(390px,100%);margin:18px auto 0;padding:14px;border:1px solid var(--line);border-radius:10px;background:#17181d}
+    .unmodded-panel label{display:block;margin-bottom:8px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+    .version-select{width:100%;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:#101114;color:var(--text)}
+    .unmodded-play{margin-top:10px;width:100%;min-height:42px;border:1px solid #3d4d28;border-radius:8px;background:#1c2417;color:var(--text)}
+    .pack-picker{display:grid;gap:16px}
+    .chooser-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
+    .preset-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);display:flex;flex-direction:column;min-height:170px;box-shadow:var(--shadow)}
+    .preset-card:hover{border-color:var(--accent);background:var(--surface2)}
+    .preset-card h3{margin:0 0 8px;font-size:18px}
+    .preset-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;flex:1}
+    .preset-meta{margin-top:12px;color:#bcaef7;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .preset-actions{display:flex;gap:8px;margin-top:14px}
+    .secondary-button{min-width:unset;min-height:42px;padding:0 12px;background:transparent;border:1px solid var(--line);color:var(--text)}
+    .primary-button{min-width:unset;min-height:42px;padding:0 14px}
+    .danger-button{min-width:unset;min-height:42px;padding:0 14px;background:transparent;border:1px solid rgba(255,109,109,.4);color:#ff9d9d}
+    .chooser-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:8px}
+    .mini-note{color:var(--muted);font-size:11px}
+    .hidden{display:none !important}
+    .field{display:grid;gap:8px;margin-top:14px}
+    .field input[type="text"]{width:100%;min-height:42px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:#101114;color:var(--text)}
+    .field input[type="file"]{width:100%;padding:10px;border:1px dashed var(--line);border-radius:8px;background:#101114;color:var(--text)}
+    .toast{position:fixed;right:20px;bottom:20px;padding:12px 16px;border:1px solid #454a58;border-radius:10px;background:#23262c;color:var(--text);box-shadow:var(--shadow)}
+    .toast[hidden]{display:none}
+    @media (max-width:820px){.app{grid-template-columns:1fr}.aside{min-height:auto}.brand{padding-bottom:14px}.sidebar-bottom{display:none}.main{padding-top:12px}.topbar{margin-bottom:20px}}
+  </style>
 </head>
-<body><div class="app">
-<aside aria-label="Modpack navigation"><div class="brand"><div class="brand-mark" aria-hidden="true">O</div><div><div class="brand-name">OGQWERTY</div><div class="brand-caption">MODPACK STUDIO</div></div></div><div class="side-label">Your modpacks</div><nav id="packList" class="pack-list" aria-label="Your modpacks"></nav><div class="side-actions"><button id="newPack" class="side-button add" type="button">＋ New modpack</button><button id="duplicatePack" class="side-button" type="button">▣ Duplicate</button></div><div class="sidebar-bottom">Your pack settings are saved in this browser.</div></aside>
-<main><header class="topbar"><div>Modpacks / <strong id="breadcrumbName">Home</strong></div><div class="top-actions"><button id="backHome" class="icon-button" type="button" hidden>← Home</button><button id="exportPack" class="icon-button" type="button" hidden>Export pack</button><div class="profile-wrap"><button id="profileToggle" class="profile-trigger" type="button" aria-expanded="false" aria-controls="profilePopover"><span id="profileAvatar" class="profile-avatar" aria-hidden="true">✦</span><span id="profileButtonName">Player profile</span><span class="profile-caret" aria-hidden="true">▾</span></button><section id="profilePopover" class="profile-popover" aria-label="Eaglercraft player profile" hidden><h2>Player profile</h2><p class="profile-help">Set a display name, custom skin and cape preference.</p><div class="profile-field"><label for="playerName">Eaglercraft name</label><input id="playerName" maxlength="16" autocomplete="nickname" placeholder="Enter your player name"></div><div class="profile-field"><label for="skinFile">Skin image (PNG)</label><div class="skin-row"><div id="skinPreview" class="skin-preview">No skin<br>selected</div><div class="skin-input-wrap"><input id="skinFile" type="file" accept="image/png" aria-label="Choose a PNG skin file"></div></div></div><div class="profile-field"><label for="capeChoice">Cape</label><select id="capeChoice"><option value="none">No cape</option><option value="red">Classic red</option><option value="blue">Ocean blue</option><option value="green">Forest green</option><option value="purple">Royal purple</option><option value="gold">Golden</option><option value="black">Midnight black</option></select></div><p class="profile-note">These preferences are saved in this browser. Whether a skin or cape appears in-game depends on the selected client and server supporting it.</p><button id="saveProfile" class="profile-save" type="button">Save profile</button></section></div></div></header>
-<section id="homeView"><section class="hero"><div class="eyebrow">Your game, your setup</div><h1>Ready when you are.</h1><p id="homeDescription">Pick a pack, personalize its options, and get ready to play.</p><div class="active-pack-card"><div class="pack-heading"><div class="pack-cover" aria-hidden="true">⚒</div><div class="pack-title"><h2 id="activePackName">No modpack yet</h2><span id="activePackMeta">Create a pack to get started</span></div><span class="version-pill">Eaglercraft setup</span></div><button id="launch" class="launch-button" type="button">▶ Launch</button><div id="launchNote" class="launch-note">The modpack launch integration is a placeholder for now.</div><div class="unmodded-panel"><label for="gameVersion">Play unmodded Eaglercraft</label><select id="gameVersion" class="version-select" aria-label="Choose an Eaglercraft version"></select><button id="playUnmodded" class="unmodded-play" type="button">Play unmodded</button><div class="launch-note">Opens the selected client in a new tab.</div></div></div><section class="server-panel" aria-labelledby="serverHeading"><p id="serverHeading" class="server-caption">Click on a server to copy the IP</p><div id="serverList" class="server-list" aria-label="Eaglercraft server addresses"></div><p class="server-source">Community-listed addresses may change or be unavailable. Check <a href="https://dev.eaglercraft.com/servers" target="_blank" rel="noopener noreferrer">Eaglercraft server listings</a> for current details.</p></section></section><section><div class="section-heading"><h2>What’s new</h2><p>A few ideas for your next setup.</p></div><div class="feature-grid"><article class="feature"><h3>🎨 Make it yours</h3><p>Choose options for each saved pack.</p></article><article class="feature"><h3>📦 Keep packs organized</h3><p>Create separate setups and switch between them.</p></article><article class="feature"><h3>💾 Saved on this device</h3><p>Your pack settings stay in this browser.</p></article></div></section></section>
-<section id="creatorView" hidden><section class="hero"><div class="eyebrow">Pack creator</div><h1 id="creatorTitle">Build your modpack.</h1><p>Give your setup a name and choose its options.</p></section><section class="editor"><div class="editor-head"><div><h2 id="editorTitle">Modpack details</h2><p>Your pack is saved in this browser.</p></div><input id="packName" class="edit-name" maxlength="48" placeholder="Pack name" aria-label="Pack name"></div><div id="options" class="options-grid"></div><div class="editor-footer"><span id="saveStatus">Choose options, then create your pack.</span><button id="deletePack" class="delete-button" type="button" hidden>Delete pack</button></div><button id="createPack" class="primary-button" type="button">Create modpack</button></section></section>
-</main></div><div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-<script>
-const KEY="ogqwerty-modpack-studio-v1",PROFILE_KEY="ogqwerty-player-profile-v1";
-const OPTIONS=["Custom colors","Extra keybinds","Render tweaks","Fast world loading","Inventory shortcuts","Ambient sounds","Low-lag mode"];
-const CLIENTS=[
-{label:"Pre-classic rd-132211 (WASM)",path:"pre-classic-rd-132211-wasm.html"},{label:"Indev 20100223 (WASM)",path:"indev-20100223-wasm.html"},{label:"Classic 0.0.23a-01 (WASM)",path:"classic-0.0.23a-01-wasm.html"},{label:"Alpha 1.2.6 (WASM)",path:"alpha-1.2.6-wasm.html"},{label:"Beta 1.9 (WASM)",path:"beta-1.9-wasm.html"},
-{label:"Eaglercraft 1.0",path:"1.0.html"},{label:"Eaglercraft 1.0 (WASM)",path:"1.0-wasm.html"},{label:"Eaglercraft 1.1",path:"1.1.html"},{label:"Eaglercraft 1.2.3 (WASM)",path:"1.2.3-wasm.html"},{label:"Eaglercraft 1.2.5 (WASM)",path:"1.2.5-wasm.html"},{label:"Eaglercraft 1.3.2 (WASM)",path:"1.3.2-wasm.html"},{label:"Eaglercraft 1.4.7 (WASM)",path:"1.4.7-wasm.html"},{label:"Eaglercraft 1.5.2 (WASM)",path:"1.5.2-wasm.html"},{label:"Eaglercraft 1.6.4",path:"1.6.4.html"},{label:"Eaglercraft 1.7.10 (WASM)",path:"1.7.10-wasm.html"},{label:"Eaglercraft 1.8.8",path:"1.8.8.html"},{label:"Eaglercraft 1.8.8 (WASM)",path:"1.8.8-wasm.html"},{label:"Eaglercraft 1.12.2 (WASM)",path:"1.12.2-wasm.html"},{label:"Eaglercraft 1.13.2 (WASM)",path:"1.13.2-wasm.html"},{label:"Eaglercraft 1.14.4 (WASM)",path:"1.14.4-wasm.html"},{label:"Eaglercraft 1.15.2 (WASM)",path:"1.15.2-wasm.html"},{label:"Eaglercraft 1.16.5",path:"1.16.5.html"},{label:"Eaglercraft 1.16.5 (WASM)",path:"1.16.5-wasm.html"},{label:"Eaglercraft 1.20.6 (WASM)",path:"1.20.6-wasm.html"},{label:"Eaglercraft 1.21.11 (WASM)",path:"1.21.11-wasm.html"},{label:"Eaglercraft 26.1.2 (WASM)",path:"26.1.2-wasm.html"},{label:"Eaglercraft 26.2 (WASM)",path:"26.2-wasm.html"},{label:"Eaglercraft 26.3 (WASM)",path:"26.3-wasm.html"}];
-const SERVERS=[{name:"VanillaMC",address:"wss://vanillamc.org"},{name:"HeartSMP",address:"wss://play.heartsmp.net"},{name:"SME Network",address:"wss://sme-mc.com"},{name:"MVNDICRAFT",address:"wss://play.mvndicraft.net"},{name:"Sculk SMP",address:"wss://sculksmp.xyz"},{name:"MercuryMC",address:"wss://mc.mercurymc.xyz"},{name:"ArchMC",address:"wss://archmc.fun"},{name:"VoidsentMC",address:"wss://mc.voidsent.net"},{name:"Pixel Craft",address:"wss://play.pixelcraft.ga"},{name:"Zentic Network",address:"wss://zentic.org"},{name:"Dumbshit Survival X",address:"wss://mc.dumbshit.xyz"},{name:"FKAS Survival",address:"wss://fkasmc.ga"},{name:"HeartSMP Lifesteal",address:"wss://lifesteal.smp.gg"},{name:"TuffNET",address:"wss://play.tuffnet.xyz"},{name:"ZythMC",address:"wss://zythmc.ga"},{name:"GalacticPVP",address:"wss://galacticmc.xyz"},{name:"AsianF4rmer",address:"wss://asianf4rmer.tk"},{name:"null's World",address:"wss://nulls.world"},{name:"SME MC Network",address:"wss://play.smemc.com"},{name:"Aeon Network",address:"wss://aeonnetwork.xyz"},{name:"xenaMC",address:"wss://xenamc.com"},{name:"Bagel SMP",address:"wss://bagelsmp.com"},{name:"ShadowFlare",address:"wss://shadowflare.com"}];
-let state={activeId:null,packs:[]},editingId=null,draft=new Set(),toastTimer,profile={name:"",cape:"none",skinData:""},pendingSkin="";
-try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&Array.isArray(saved.packs))state=saved}catch{}try{profile={...profile,...JSON.parse(localStorage.getItem(PROFILE_KEY)||"{}")}}catch{}
-const $=s=>document.querySelector(s),toast=message=>{$("#toast").textContent=message;$("#toast").hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("#toast").hidden=true,4000)},active=()=>state.packs.find(p=>p.id===state.activeId)||null;
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));$("#saveStatus").textContent="All changes saved."}catch{toast("Could not save pack settings in this browser.")}}
-function render(){const p=active();$("#activePackName").textContent=p?.name||"No modpack yet";$("#activePackMeta").textContent=p?`${p.enabled.length} options enabled`:"Create a pack to get started";$("#launch").textContent=p?"▶ Launch":"＋ Make a modpack";$("#launchNote").textContent=p?"The modpack launch integration is a placeholder for now.":"Create a pack or play unmodded Eaglercraft below.";$("#homeDescription").textContent=p?"Pick a pack, personalize its options, and get ready to play.":"Create your first pack, or play unmodded Eaglercraft.";$("#breadcrumbName").textContent=p?.name||"Home";$("#exportPack").hidden=!p;const list=$("#packList");list.replaceChildren();state.packs.forEach(pack=>{const b=document.createElement("button");b.type="button";b.className="pack-row"+(pack.id===state.activeId?" active":"");const name=document.createElement("span");name.className="pack-row-name";name.textContent=`⚒ ${pack.name}`;const meta=document.createElement("span");meta.className="pack-row-meta";meta.textContent=`${pack.enabled.length} options`;b.append(name,meta);b.onclick=()=>{state.activeId=pack.id;save();render()};list.append(b)});$("#duplicatePack").disabled=!p}
-function openEditor(pack=null){editingId=pack?.id||null;draft=new Set(pack?.enabled||[]);$("#homeView").hidden=true;$("#creatorView").hidden=false;$("#backHome").hidden=false;$("#packName").value=pack?.name||"";$("#creatorTitle").textContent=pack?"Edit your modpack.":"Build your modpack.";$("#editorTitle").textContent=pack?"Edit modpack":"Modpack details";$("#createPack").textContent=pack?"Save changes":"Create modpack";$("#deletePack").hidden=!pack;const box=$("#options");box.replaceChildren();OPTIONS.forEach(name=>{const label=document.createElement("label");label.className="option";const check=document.createElement("input");check.type="checkbox";check.checked=draft.has(name);check.onchange=()=>check.checked?draft.add(name):draft.delete(name);label.append(check,document.createTextNode(name));box.append(label)})}
-function home(){editingId=null;$("#creatorView").hidden=true;$("#homeView").hidden=false;$("#backHome").hidden=true;render()}
-function renderClients(){const select=$("#gameVersion");CLIENTS.forEach(client=>{const option=document.createElement("option");option.value=client.path;option.textContent=client.label;select.append(option)})}
-function renderServers(){const list=$("#serverList");SERVERS.forEach(server=>{const button=document.createElement("button");button.type="button";button.className="server-copy";button.setAttribute("aria-label",`Copy ${server.name} server address ${server.address}`);const name=document.createElement("strong");name.textContent=server.name;const hint=document.createElement("span");hint.textContent="Click to copy address";button.append(name,hint);button.onclick=()=>copyServer(server);list.append(button)})}
-async function copyServer(server){try{await navigator.clipboard.writeText(server.address);toast(`Copied ${server.address}`)}catch{const input=document.createElement("textarea");input.value=server.address;input.style.position="fixed";input.style.opacity="0";document.body.append(input);input.select();const copied=document.execCommand("copy");input.remove();toast(copied?`Copied ${server.address}`:"Could not copy automatically. Address: "+server.address)}}
-function showSkin(data){const box=$("#skinPreview");box.replaceChildren();if(data){const img=document.createElement("img");img.src=data;img.alt="Selected skin preview";box.append(img)}else box.innerHTML="No skin<br>selected";const avatar=$("#profileAvatar");avatar.replaceChildren();if(data){const img=document.createElement("img");img.src=data;img.alt="";avatar.append(img)}else avatar.textContent="✦"}
-function renderProfile(){ $("#playerName").value=profile.name||"";$("#capeChoice").value=profile.cape||"none";pendingSkin=profile.skinData||"";showSkin(pendingSkin);$("#profileButtonName").textContent=profile.name||"Player profile" }
-function saveProfile(){const name=$("#playerName").value.trim();if(name.length>16){toast("Player names can be up to 16 characters.");return}profile={name,cape:$("#capeChoice").value,skinData:pendingSkin};try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));renderProfile();$("#profilePopover").hidden=true;$("#profileToggle").setAttribute("aria-expanded","false");toast("Player profile saved in this browser.")}catch{toast("Could not save the skin. Try a smaller PNG image.")}}
-async function play(){const path=$("#gameVersion").value;const gameTab=window.open("about:blank","_blank");if(!gameTab){toast("Your browser blocked the new tab. Allow pop-ups for this site and try again.");return}gameTab.opener=null;try{const response=await fetch(path,{method:"HEAD"});if(response.ok){gameTab.location.href=new URL(path,document.baseURI).href;return}}catch{}gameTab.close();toast(`Could not find ${path}. Confirm the file is uploaded and available on the live site.`)}
-$("#profileToggle").onclick=()=>{const panel=$("#profilePopover"),open=panel.hidden;panel.hidden=!open;$("#profileToggle").setAttribute("aria-expanded",String(open));if(open)$("#playerName").focus()};document.addEventListener("click",e=>{if(!e.target.closest(".profile-wrap")){$("#profilePopover").hidden=true;$("#profileToggle").setAttribute("aria-expanded","false")}});$("#saveProfile").onclick=saveProfile;$("#skinFile").onchange=event=>{const file=event.target.files?.[0];if(!file)return;if(file.size>300000){toast("Choose a skin PNG smaller than 300 KB.");event.target.value="";return}const reader=new FileReader();reader.onload=()=>{pendingSkin=String(reader.result);showSkin(pendingSkin)};reader.onerror=()=>toast("Could not read that skin image.");reader.readAsDataURL(file)};
-$("#launch").onclick=()=>active()?toast("The modpack Launch button is still a placeholder."):openEditor();$("#newPack").onclick=()=>openEditor();$("#backHome").onclick=home;$("#playUnmodded").onclick=play;
-$("#createPack").onclick=()=>{const name=$("#packName").value.trim();if(!name){$("#packName").focus();return}if(editingId){const p=state.packs.find(x=>x.id===editingId);if(p){p.name=name;p.enabled=[...draft]}state.activeId=editingId}else{const p={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,enabled:[...draft]};state.packs.push(p);state.activeId=p.id}save();home();toast("Modpack saved.")};
-$("#deletePack").onclick=()=>{if(!editingId)return;state.packs=state.packs.filter(p=>p.id!==editingId);state.activeId=state.packs[0]?.id||null;save();home()};$("#duplicatePack").onclick=()=>{const p=active();if(p)openEditor({name:p.name+" Copy",enabled:p.enabled})};$("#exportPack").onclick=()=>{const p=active();if(!p)return;const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(p,null,2)],{type:"application/json"}));a.download="modpack.json";a.click();URL.revokeObjectURL(a.href)};
-renderClients();renderServers();renderProfile();render();
-</script></body></html>
+<body>
+  <div class="app">
+    <aside aria-label="Modpack navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">O</div>
+        <div>
+          <div class="brand-name">OGQWERTY</div>
+          <div class="brand-caption">MODPACK STUDIO</div>
+        </div>
+      </div>
+
+      <div class="side-label">Your modpacks</div>
+      <nav id="packList" class="pack-list" aria-label="Your modpacks"></nav>
+
+      <div class="side-actions">
+        <button id="newPack" class="side-button add" type="button">＋ New modpack</button>
+        <button id="duplicatePack" class="side-button" type="button">Duplicate</button>
+      </div>
+
+      <div class="sidebar-bottom">Your pack settings are saved in this browser.</div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>Modpacks / <strong id="breadcrumbName">Home</strong></div>
+        <div class="top-actions">
+          <button id="backHome" class="icon-button" type="button" hidden>← Home</button>
+          <button id="exportPack" class="icon-button" type="button" hidden>Export pack</button>
+        </div>
+      </header>
+
+      <section id="homeView" class="page">
+        <section class="hero">
+          <div class="eyebrow">Your game, your setup</div>
+          <h1>Ready when you are.</h1>
+          <p id="homeDescription">Pick a pack, personalize its options, and get ready to play.</p>
+        </section>
+
+        <div class="active-pack-card">
+          <div class="pack-header">
+            <div class="pack-cover" aria-hidden="true">O</div>
+            <div class="pack-title">
+              <h2 id="activePackName">No modpack yet</h2>
+              <span id="saveStatus">Saved</span>
+            </div>
+          </div>
+          <div id="activePackMeta" class="pack-meta">Create a pack to get started.</div>
+          <div class="launch-row">
+            <button id="launch" class="launch-button" type="button">Launch</button>
+          </div>
+          <div class="launch-note">The modpack launch integration is still a placeholder for now.</div>
+
+          <div class="unmodded-panel">
+            <label for="gameVersion">Play unmodded Eaglercraft</label>
+            <select id="gameVersion" class="version-select" aria-label="Choose an Eaglercraft version">
+              <option value="1.8.8">1.8.8</option>
+              <option value="1.12.2">1.12.2</option>
+              <option value="1.16.5">1.16.5</option>
+              <option value="1.20.6">1.20.6</option>
+            </select>
+            <button id="playUnmodded" class="unmodded-play" type="button">Play unmodded</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="creatorView" class="page hidden" aria-live="polite">
+        <section class="hero">
+          <div class="eyebrow">Pack creator</div>
+          <h1 id="creatorTitle">Build your modpack.</h1>
+          <p>Pick a pre-made Eaglercraft pack or import your own HTML pack file.</p>
+        </section>
+
+        <div class="pack-picker">
+          <div class="chooser-grid" id="presetGrid"></div>
+
+          <div class="chooser-footer">
+            <div class="mini-note">You can also import a .html pack file if you already have one saved locally.</div>
+            <div class="preset-actions">
+              <button id="customFromScratch" class="secondary-button" type="button">From scratch</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="packName">Pack name</label>
+            <input id="packName" type="text" placeholder="E.g. Survival Eagler Pack" maxlength="40">
+          </div>
+
+          <div class="field">
+            <label for="packFileInput">Import an existing pack file</label>
+            <input id="packFileInput" type="file" accept=".html,.htm,.txt,.json" aria-label="Import an existing pack file">
+          </div>
+
+          <div class="preset-actions">
+            <button id="createPack" class="primary-button" type="button">Create pack</button>
+            <button id="deletePack" class="danger-button" type="button">Delete</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script>
+    const KEY = 'ogqwerty-modpack-studio-v1';
+    const OPTIONS = [
+      'Custom colors',
+      'Extra keybinds',
+      'Render tweaks',
+      'Fast world loading',
+      'Inventory shortcuts',
+      'Ambient sounds',
+      'Low-lag mode'
+    ];
+
+    const PRESET_PACKS = [
+      {
+        id: 'survival-qol',
+        name: 'Survival + QoL',
+        description: 'A balanced Eaglercraft survival setup with performance boosts and convenience tweaks.',
+        tags: 'Survival · Performance',
+        enabled: ['Custom colors', 'Render tweaks', 'Fast world loading', 'Inventory shortcuts']
+      },
+      {
+        id: 'pvp-arena',
+        name: 'PvP Arena',
+        description: 'Fast reaction time, cleaner visuals, and keybind-focused settings for duels and brawls.',
+        tags: 'PvP · Fast',
+        enabled: ['Extra keybinds', 'Render tweaks', 'Low-lag mode', 'Ambient sounds']
+      },
+      {
+        id: 'creative-builder',
+        name: 'Creative Builder',
+        description: 'A visual-friendly build pack with inventory shortcuts and more room for design work.',
+        tags: 'Creative · Build',
+        enabled: ['Custom colors', 'Render tweaks', 'Inventory shortcuts', 'Ambient sounds']
+      },
+      {
+        id: 'low-latency',
+        name: 'Low-Latency Lite',
+        description: 'Optimized for older hardware and lower-end browsers with minimal extras turned on.',
+        tags: 'Performance · Lite',
+        enabled: ['Fast world loading', 'Low-lag mode', 'Render tweaks']
+      }
+    ];
+
+    let state = { activeId: null, packs: [] }, editingId = null, draft = new Set(), toastTimer;
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(KEY));
+      if (saved && Array.isArray(saved.packs)) state = saved;
+    } catch (e) {}
+
+    const $ = s => document.querySelector(s);
+    const toast = message => {
+      const node = $('#toast');
+      node.textContent = message;
+      node.hidden = false;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => node.hidden = true, 4000);
+    };
+
+    const active = () => state.packs.find(p => p.id === state.activeId) || null;
+
+    function save() {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+        $('#saveStatus').textContent = 'Saved';
+      } catch (e) {}
+    }
+
+    function renderPresetGrid() {
+      const grid = $('#presetGrid');
+      grid.innerHTML = '';
+
+      PRESET_PACKS.forEach(pack => {
+        const card = document.createElement('div');
+        card.className = 'preset-card';
+        card.innerHTML = `
+          <h3>${pack.name}</h3>
+          <p>${pack.description}</p>
+          <div class="preset-meta">${pack.tags}</div>
+          <div class="preset-actions">
+            <button type="button" class="primary-button" data-pack-id="${pack.id}">Use this pack</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      grid.querySelectorAll('[data-pack-id]').forEach(button => {
+        button.addEventListener('click', () => {
+          const preset = PRESET_PACKS.find(p => p.id === button.dataset.packId);
+          if (!preset) return;
+          const_packFromPreset(preset);
+        });
+      });
+    }
+
+    function createPackRecord(name, enabled = [], source = 'custom') {
+      return {
+        id: crypto.randomUUID ? crypto.randomUUID() : `pack-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        name,
+        enabled: [...enabled],
+        source
+      };
+    }
+
+    function setEditorValuesFromPack(pack) {
+      editingId = pack ? pack.id : null;
+      draft = new Set(pack ? pack.enabled : []);
+      $('#packName').value = pack ? pack.name : '';
+      $('#creatorTitle').textContent = pack ? `Edit ${pack.name}` : 'Build your modpack.';
+    }
+
+    function openEditor(pack = null) {
+      setEditorValuesFromPack(pack);
+      $('#homeView').classList.add('hidden');
+      $('#creatorView').classList.remove('hidden');
+      $('#backHome').hidden = false;
+      $('#exportPack').hidden = false;
+      $('#packName').focus();
+    }
+
+    function home() {
+      editingId = null;
+      $('#creatorView').classList.add('hidden');
+      $('#homeView').classList.remove('hidden');
+      $('#backHome').hidden = true;
+      $('#exportPack').hidden = true;
+      render();
+    }
+
+    function renderPackList() {
+      const list = $('#packList');
+      list.innerHTML = '';
+
+      state.packs.forEach(pack => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'pack-row' + (state.activeId === pack.id ? ' active' : '');
+        row.innerHTML = `
+          <div class="pack-row-name">${pack.name}</div>
+          <div class="pack-row-meta">${pack.enabled.length} options</div>
+        `;
+        row.addEventListener('click', () => {
+          state.activeId = pack.id;
+          save();
+          render();
+        });
+        list.appendChild(row);
+      });
+    }
+
+    function render() {
+      const p = active();
+      $('#breadcrumbName').textContent = p ? p.name : 'Home';
+      $('#activePackName').textContent = p ? p.name : 'No modpack yet';
+      $('#activePackMeta').textContent = p ? `${p.enabled.length} options enabled` : 'Create a pack to get started.';
+      renderPackList();
+    }
+
+    function updateSelectedPackFromDraft() {
+      const name = $('#packName').value.trim();
+      if (!name) {
+        $('#packName').focus();
+        return false;
+      }
+
+      const nextEnabled = Array.from(draft);
+
+      if (editingId) {
+        const pack = state.packs.find(x => x.id === editingId);
+        if (pack) {
+          pack.name = name;
+          pack.enabled = nextEnabled;
+          pack.source = pack.source || 'custom';
+        }
+      } else {
+        const pack = createPackRecord(name, nextEnabled, 'custom');
+        state.packs.push(pack);
+        state.activeId = pack.id;
+      }
+
+      save();
+      home();
+      return true;
+    }
+
+    function _packFromPreset(preset) {
+      const existing = state.packs.find(p => p.name === preset.name && p.source === 'preset');
+      const pack = createPackRecord(existing ? `${preset.name} copy` : preset.name, preset.enabled, 'preset');
+      state.packs.push(pack);
+      state.activeId = pack.id;
+      save();
+      render();
+      openEditor(pack);
+      toast(`Using ${preset.name}.`);
+    }
+
+    function createImportedPackFromFile(file) {
+      const fileName = (file.name || 'Imported pack').replace(/\.[^.]+$/, '');
+      const pack = createPackRecord(fileName, OPTIONS.slice(0, 2), 'imported');
+      state.packs.push(pack);
+      state.activeId = pack.id;
+      save();
+      render();
+      openEditor(pack);
+      $('#packName').value = fileName;
+      toast(`Imported ${file.name}.`);
+    }
+
+    function clientCandidates(version) {
+      return [
+        `${version}.html`,
+        `${version}-wasm.html`,
+        `play/${version}.html`,
+        `play/${version}-wasm.html`
+      ];
+    }
+
+    async function play() {
+      const version = $('#gameVersion').value;
+      const gameTab = window.open('about:blank', '_blank');
+      if (!gameTab) {
+        toast('Allow pop-ups for this site, then click Play unmodded again.');
+        return;
+      }
+
+      const candidates = clientCandidates(version);
+      const urls = candidates.map(name => new URL(name, window.location.href).href);
+      const current = urls[0];
+      gameTab.location.href = current;
+      toast(`Opening ${version} in a new tab.`);
+    }
+
+    $('#launch').onclick = () => {
+      if (active()) {
+        toast('The modpack Launch button is still a placeholder.');
+      } else {
+        openEditor();
+      }
+    };
+
+    $('#newPack').onclick = () => openEditor();
+    $('#backHome').onclick = home;
+    $('#playUnmodded').onclick = play;
+
+    $('#createPack').onclick = () => {
+      const name = $('#packName').value.trim();
+      if (!name) {
+        $('#packName').focus();
+        return;
+      }
+
+      if (editingId) {
+        const pack = state.packs.find(x => x.id === editingId);
+        if (pack) {
+          pack.name = name;
+          pack.enabled = Array.from(draft);
+          state.activeId = pack.id;
+          save();
+          home();
+          return;
+        }
+      }
+
+      const pack = createPackRecord(name, Array.from(draft), 'custom');
+      state.packs.push(pack);
+      state.activeId = pack.id;
+      save();
+      home();
+    };
+
+    $('#deletePack').onclick = () => {
+      if (!editingId) return;
+      state.packs = state.packs.filter(p => p.id !== editingId);
+      state.activeId = state.packs[0]?.id || null;
+      save();
+      home();
+    };
+
+    $('#duplicatePack').onclick = () => {
+      if (!state.activeId) {
+        toast('Select a modpack to duplicate first.');
+        return;
+      }
+      const source = active();
+      if (!source) return;
+      const dup = createPackRecord(`${source.name} copy`, source.enabled, source.source || 'custom');
+      state.packs.push(dup);
+      state.activeId = dup.id;
+      save();
+      render();
+      toast(`Duplicated ${source.name}.`);
+    };
+
+    $('#customFromScratch').onclick = () => {
+      editingId = null;
+      draft = new Set();
+      $('#packName').value = '';
+      $('#creatorTitle').textContent = 'Build your modpack.';
+      $('#packName').focus();
+    };
+
+    $('#exportPack').onclick = () => {
+      if (!active()) return;
+      const text = JSON.stringify(active(), null, 2);
+      const blob = new Blob([text], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${active().name.replace(/\s+/g, '-').toLowerCase() || 'modpack'}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Pack exported as JSON.');
+    };
+
+    $('#packFileInput').addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      createImportedPackFromFile(file);
+      event.target.value = '';
+    });
+
+    renderPresetGrid();
+    render();
+  </script>
+</body>
+</html>
